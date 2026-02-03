@@ -3,6 +3,7 @@ import os
 import sys
 from google.genai import types
 import gemini_config as config
+from system_prompt import SYSTEM_PROMPT
     
 class GeminiClient:
     def __init__(self):
@@ -19,8 +20,7 @@ class GeminiClient:
             return "AI Assistant is not configured correctly"
         
         else:
-            # TO DO: Modify system instruction based on the purpose of your GenAI Assistant
-            system_instruction = "YOUR SYSTEM INSTRUCTION HERE"
+            system_instruction = SYSTEM_PROMPT
             
             # Add the prompt to the chat history
             self.chat_history += [types.Content(
@@ -28,8 +28,19 @@ class GeminiClient:
                   parts=[types.Part.from_text(text=user_input)]
                 )]
 
-            # TO DO: Use the client's chat history & system instruction to prompt Gemini
+            # Use the client's chat history & system instruction to prompt Gemini
+            response = self.client.models.generate_content(
+                model = "gemini-3-flash-preview",
+                config = types.GenerateContentConfig(system_instruction = system_instruction),
+                contents = self.chat_history
+            )
+    
 
-            # TO DO: Add the response text from Gemini to the client's chat history
+            # Add the response text from Gemini to the client's chat history
+            self.chat_history += [types.Content(
+                role='model',
+                parts=[types.Part.from_text(text=response.text)]
+            )]
 
-            # TO DO: Return the response text from Gemini
+            # Return the response text from Gemini
+            return response.text
