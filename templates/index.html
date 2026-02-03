@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TERMINAL 84-B</title>
+    <style>
+        body {
+            background: black;
+            color: lightgreen;
+            font-family: monospace;
+            text-transform: uppercase;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            color: lightgreen;
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            color: lightgreen;
+            font-family: monospace;
+            width: 80%;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <pre>
+[OPERATOR_INSTRUCTIONS: TERMINAL_84B]
+1. INPUT: Enter query at '$_:'.
+2. EXEC: Press 'ENTER' to transmit.
+3. WAIT: Do not interrupt hardware processing.
+4. ERR: Logic failures are logged to operator history.
+
+[STATUS: COMPLIANCE_EXPECTED]
+--------------------------------------
+        </pre>
+        <pre>
+[LOADER: 0x0042AF]... OK
+[KERNEL: MOUNTING DRIVE_C]... OK
+[TERMINAL_84B: READY]
+--------------------------------------
+    </pre>
+
+        {% if response %}
+        <pre>[USER PROMPT: {{ prompt.upper() }}]</pre>
+        <pre>{{ response }}</pre>
+        {% else %}
+        <p>[STATUS: AWAITING_INPUT]</p>
+        {% endif %}
+
+        <hr style="border: 1px solid lightgreen;">
+
+        <form method="POST" action="/home">
+            <span>$_:</span>
+            <input type="text" name="prompt" autofocus autocomplete="off">
+        </form>
+    </div>
+</body>
+
+</html>
