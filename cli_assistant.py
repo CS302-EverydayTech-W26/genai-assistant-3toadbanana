@@ -11,8 +11,10 @@ def main():
             print ("[SYSTEM: TERMINATING_PROCESS_84-B]\n[STATUS: SHUTTING DOWN...]") 
             break
         
+        print("[KERNEL: MOUNTING DRIVE_C]... OK\n[TERMINAL_84B: LOADING]\n--------------------------------------\n")
+
         response = client.generate_response(user_input)
-        print("\nTerminal 84-B: " + response + "\n")
+        print(response + "\n")
      
 
 if __name__ == "__main__":
