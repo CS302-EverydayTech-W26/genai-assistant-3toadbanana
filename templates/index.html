@@ -63,31 +63,16 @@
 
         pre {
             white-space: pre-wrap;
-            color: lightgreen;
+            color: #22ff22;
         }
 
         input {
             background: transparent;
             border: none;
-            color: lightgreen;
+            color: #22ff22;
             font-family: monospace;
             width: 80%;
             outline: none;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2em;
-            background-color: #22ff22;
-            animation: blink 1s step-end infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
         }
     </style>
 </head>
@@ -121,7 +106,7 @@
         <hr style="border: 1px solid lightgreen;">
 
         <form method="POST" action="/home">
-            <span>$_:<span class="cursor"></span></span>
+            <span>$_:</span>
             <input type="text" name="prompt" autofocus autocomplete="off">
         </form>
     </div>
