@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TERMINAL 84-B</title>
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: #050505;
+            color: #22ff22;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 5px rgba(34, 255, 34, 0.7), 0 0 10px rgba(34, 255, 34, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            /* This creates horizontal lines using a linear gradient */
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            /* Allows you to still click buttons/inputs underneath */
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 0.98;
+            }
+
+            5% {
+                opacity: 0.95;
+            }
+
+            10% {
+                opacity: 0.99;
+            }
+
+            15% {
+                opacity: 0.92;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .crt-screen {
+            animation: flicker 0.1s infinite;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            color: #22ff22;
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            color: #22ff22;
+            font-family: monospace;
+            width: 80%;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <pre>
+[OPERATOR_INSTRUCTIONS: TERMINAL_84B]
+1. INPUT: Enter query at '$_:'.
+2. EXEC: Press 'ENTER' to transmit.
+3. WAIT: Do not interrupt hardware processing.
+4. ERR: Logic failures are logged to operator history.
+
+[STATUS: COMPLIANCE_EXPECTED]
+--------------------------------------
+        </pre>
+        <pre>
+[LOADER: 0x0042AF]... OK
+[KERNEL: MOUNTING DRIVE_C]... OK
+[TERMINAL_84B: READY]
+--------------------------------------
+    </pre>
+
+        {% if response %}
+        <pre>[USER PROMPT: {{ prompt.upper() }}]</pre>
+        <pre>{{ response }}</pre>
+        {% else %}
+        <p>[STATUS: AWAITING_INPUT]</p>
+        {% endif %}
+
+        <hr style="border: 1px solid lightgreen;">
+
+        <form method="POST" action="/home">
+            <span>$_:</span>
+            <input type="text" name="prompt" autofocus autocomplete="off">
+        </form>
+    </div>
+</body>
+
+</html>
