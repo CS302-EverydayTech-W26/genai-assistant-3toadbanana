@@ -5,11 +5,56 @@
     <title>TERMINAL 84-B</title>
     <style>
         body {
-            background: black;
-            color: lightgreen;
-            font-family: monospace;
-            text-transform: uppercase;
-            padding: 20px;
+            min-height: 100vh;
+            background-color: #050505;
+            color: #22ff22;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 5px rgba(34, 255, 34, 0.7), 0 0 10px rgba(34, 255, 34, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            /* This creates horizontal lines using a linear gradient */
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            /* Allows you to still click buttons/inputs underneath */
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 0.98;
+            }
+
+            5% {
+                opacity: 0.95;
+            }
+
+            10% {
+                opacity: 0.99;
+            }
+
+            15% {
+                opacity: 0.92;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .crt-screen {
+            animation: flicker 0.1s infinite;
         }
 
         .container {
@@ -28,6 +73,21 @@
             font-family: monospace;
             width: 80%;
             outline: none;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: #22ff22;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -61,7 +121,7 @@
         <hr style="border: 1px solid lightgreen;">
 
         <form method="POST" action="/home">
-            <span>$_:</span>
+            <span>$_:<span class="cursor"></span></span>
             <input type="text" name="prompt" autofocus autocomplete="off">
         </form>
     </div>
